@@ -1,6 +1,15 @@
 const { TestWatcher } = require('@jest/core');
 const ContactManager = require('./ContactManager.js');
 
+const add = jest.fn((a, b) => a+b);
+
+test('Add mockup 1+3 to 4', () => {
+    expect(add(1,3)).toBe(4);
+    expect(add).toHaveBeenCalled();
+    expect(add).toHaveBeenCalledWith(1,3);
+    expect(add).toHaveBeenCalledTimes(1);
+})
+
 describe("ContactManagerTest", () => {
     let contact;
     
@@ -11,6 +20,7 @@ describe("ContactManagerTest", () => {
         const len = contact.getAllContact().length;
         expect(len).toBe(1);
     })
+
 
     test('contact already Exists', () => {
         contact.addContact("ArunR", "Rajachandar", "9629983177");
